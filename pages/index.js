@@ -5,8 +5,8 @@ export default function Home() {
     <div class="d-flex justify-content-center align-items-center vh-100">
       <div class="center-box">
         <div class="text-center w-100">
-          <h2>Centered Box</h2>
-          <p>This box is 400px by 500px and perfectly centered!</p>
+          <h2>The Price of Eggs</h2>
+          <p>March: $6.22</p>
         </div>
       </div>
     </div>
