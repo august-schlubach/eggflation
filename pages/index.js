@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -15,18 +15,16 @@ export default function Home() {
         <p className="text-gray-700 mb-6">
           Deploy API routes, static frontend, databases, and more.
         </p>
-
+        <p>taco time!</p>
         <div className="sm:flex">
           <a
             href="https://www.digitalocean.com/docs/app-platform"
-            className="block py-2 px-5 rounded shadow bg-gray-500 text-gray-100 sm:mr-2 mb-2 sm:mb-0"
-          >
+            className="block py-2 px-5 rounded shadow bg-gray-500 text-gray-100 sm:mr-2 mb-2 sm:mb-0">
             View the Docs
           </a>
           <a
             href="https://cloud.digitalocean.com/apps"
-            className="block py-2 px-5 rounded shadow bg-blue-500 text-blue-100"
-          >
+            className="block py-2 px-5 rounded shadow bg-blue-500 text-blue-100">
             View Your Dashboard
           </a>
         </div>
@@ -37,8 +35,7 @@ export default function Home() {
         <svg
           className="hidden lg:block text-white fill-current absolute h-full transform -translate-x-1/2 w-48 z-10"
           viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
+          preserveAspectRatio="none">
           <polygon points="50,0 100,0 50,100 0,100"></polygon>
         </svg>
 
