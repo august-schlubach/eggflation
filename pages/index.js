@@ -15,7 +15,7 @@ export default function Home() {
         <p className="text-gray-700 mb-6">
           Deploy API routes, static frontend, databases, and more.
         </p>
-        <p>taco time!</p>
+        <p>taco time!?</p>
         <div className="sm:flex">
           <a
             href="https://www.digitalocean.com/docs/app-platform"
