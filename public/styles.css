@@ -9,7 +9,7 @@
 }
 
 .center-box {
-  width: 400px;
+  width: 600px;
   height: 500px;
   background: white;
   border-radius: 12px;
@@ -23,4 +23,11 @@ body,
 html {
   height: 100%;
   margin: 0;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+a.hover {
+  text-decoration: underline;
 }

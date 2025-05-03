@@ -1,0 +1,157 @@
+"use client";
+import React, { useEffect, useRef } from "react";
+import * as d3 from "d3";
+
+export default function EggsChart() {
+  const ref = useRef();
+
+  useEffect(() => {
+    d3.csv("/eggs-avg.csv").then((data) => {
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      let chartData = [];
+      let lastValidDate = null;
+
+      data.forEach((row) => {
+        months.forEach((m, i) => {
+          const value = row[m];
+          if (value !== "" && value != null && !isNaN(+value)) {
+            const price = +value;
+            const date = new Date(+row.Year, i);
+            chartData.push({ date, price });
+            // Track the last valid date
+            if (!lastValidDate || date > lastValidDate) {
+              lastValidDate = date;
+            }
+          }
+        });
+      });
+
+      // Only keep data up to lastValidDate (March 2023 in your case)
+      chartData = chartData.filter((d) => d.date <= lastValidDate);
+
+      const width = 500,
+        height = 250,
+        margin = { top: 20, right: 20, bottom: 30, left: 40 };
+      const svg = d3
+        .select(ref.current)
+        .attr("width", width)
+        .attr("height", height);
+
+      svg.selectAll("*").remove();
+
+      const x = d3
+        .scaleTime()
+        .domain([d3.min(chartData, (d) => d.date), lastValidDate])
+        .range([margin.left, width - margin.right]);
+      const y = d3
+        .scaleLinear()
+        .domain([0, d3.max(chartData, (d) => d.price)])
+        .nice()
+        .range([height - margin.bottom, margin.top]);
+
+      // X-axis: show only years
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(
+          d3
+            .axisBottom(x)
+            .ticks(d3.timeYear.every(1))
+            .tickFormat(d3.timeFormat("%Y"))
+        );
+      svg
+        .append("g")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y));
+
+      svg
+        .append("path")
+        .datum(chartData)
+        .attr("fill", "none")
+        .attr("stroke", "#69b3a2")
+        .attr("stroke-width", 2)
+        .attr(
+          "d",
+          d3
+            .line()
+            .x((d) => x(d.date))
+            .y((d) => y(d.price))
+        );
+
+      // Mouseover interactivity
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "eggs-tooltip")
+        .style("position", "absolute")
+        .style("background", "white")
+        .style("border", "1px solid #ccc")
+        .style("padding", "6px 10px")
+        .style("border-radius", "4px")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+
+      const focus = svg.append("g").style("display", "none");
+      focus
+        .append("circle")
+        .attr("r", 5)
+        .attr("fill", "#69b3a2")
+        .attr("stroke", "#333")
+        .attr("stroke-width", 1.5);
+
+      svg
+        .append("rect")
+        .attr("fill", "none")
+        .attr("pointer-events", "all")
+        .attr("width", width - margin.left - margin.right)
+        .attr("height", height - margin.top - margin.bottom)
+        .attr("transform", `translate(${margin.left},${margin.top})`)
+        .on("mouseover", () => {
+          focus.style("display", null);
+          tooltip.style("opacity", 1);
+        })
+        .on("mouseout", () => {
+          focus.style("display", "none");
+          tooltip.style("opacity", 0);
+        })
+        .on("mousemove", function (event) {
+          const [mx] = d3.pointer(event);
+          const x0 = x.invert(mx + margin.left);
+          const bisectDate = d3.bisector((d) => d.date).left;
+          const i = bisectDate(chartData, x0, 1);
+          const d0 = chartData[i - 1];
+          const d1 = chartData[i];
+          const d = !d1 || (d0 && x0 - d0.date < d1.date - x0) ? d0 : d1;
+
+          focus.attr("transform", `translate(${x(d.date)},${y(d.price)})`);
+          tooltip
+            .html(
+              `<strong>${d3.timeFormat("%b %Y")(
+                d.date
+              )}</strong><br/>Price: $${d.price.toFixed(2)}`
+            )
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY - 28 + "px");
+        });
+
+      return () => {
+        tooltip.remove();
+      };
+    });
+  }, []);
+
+  return <svg ref={ref}></svg>;
+}
