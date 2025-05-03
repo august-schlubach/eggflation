@@ -7,10 +7,10 @@ html {
   font-family: "Open Sans", sans-serif;
 }
 a {
-  color: #333;
+  color: #8f0000;
   text-decoration: none;
 }
-a.hover {
+a:hover {
   text-decoration: underline;
 }
 .detail {
@@ -43,7 +43,7 @@ a.hover {
   vertical-align: top;
   padding: 15px;
   margin-bottom: 20px;
-  width: 500px; /* Default width for web users */
+  width: 600px; /* Default width for web users */
   height: auto; /* Allow the height to adjust based on content */
   background: white;
   border-radius: 12px;
@@ -54,4 +54,22 @@ a.hover {
   .component-box {
     width: 400px; /* Adjust width for mobile users */
   }
+}
+li {
+  list-style-type: none; /* Remove default list styling */
+  padding-left: 0;
+  font-size: 0.8em; /* Remove padding for list items */
+  padding-bottom: 5px;
+}
+ul {
+  padding-left: 0; /* Remove padding for the unordered list */
+  margin: 0; /* Remove default margin */
+}
+.news-links {
+  display: flex;
+  flex-direction: column; /* Stack links vertically */
+  align-items: normal; /* Center links horizontally */
+  justify-content: left; /* Center links vertically */
+  width: 100%; /* Full width for the container */
+  padding-left: 15px;
 }

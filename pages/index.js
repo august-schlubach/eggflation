@@ -20,6 +20,27 @@ export default function Home() {
             on daily life.
           </div>
         </div>
+        <div className="news-links mt-4">
+          <ul>
+            <li>
+              <a
+                href="https://thehill.com/opinion/campaign/5275227-egg-price-inflation-cal-maine/ "
+                target="_blank"
+                rel="noopener noreferrer">
+                Egg companies are getting government bailouts while
+                price-gouging consumers
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/watch?v=ivkDQzMQBL4&ab_channel=PBSNewsHour"
+                target="_blank"
+                rel="noopener noreferrer">
+                As egg prices rise, some take a crack at chicken rentals
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="component-box">
@@ -42,6 +63,29 @@ export default function Home() {
               costs and reduced purchasing power.
             </p>
           </div>
+        </div>
+
+        <div className="news-links mt-4">
+          <ul>
+            <li>
+              <a
+                href="https://www.cnn.com/2025/04/30/business/us-pce-inflation-consumer-spending-march "
+                target="_blank"
+                rel="noopener noreferrer">
+                Consumer spending soared in March as Americans tried to get
+                ahead of tariffs
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://apnews.com/article/economy-inflation-trump-spending-80bc940b852c4821faae2b420916ea2e"
+                target="_blank"
+                rel="noopener noreferrer">
+                US inflation cools and Americans step up spending as they brace
+                for tariff impact
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
