@@ -9,15 +9,16 @@
 }
 
 .center-box {
-  width: 600px;
-  height: 500px;
+  width: 550px;
+  height: 320px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: normal;
+  justify-content: left;
   vertical-align: top;
+  padding: 15px;
 }
 body,
 html {
