@@ -40,7 +40,7 @@ export default function GenericChart({ csvUrl }) {
 
       chartData = chartData.filter((d) => d.date <= lastValidDate);
 
-      const width = 500,
+      const width = 350,
         height = 250,
         margin = { top: 20, right: 20, bottom: 30, left: 40 };
       const svg = d3
