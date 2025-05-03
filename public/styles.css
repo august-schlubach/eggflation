@@ -24,6 +24,7 @@ body,
 html {
   height: 100%;
   margin: 0;
+  font-family: "Open Sans", sans-serif;
 }
 a {
   color: #333;
@@ -31,4 +32,9 @@ a {
 }
 a.hover {
   text-decoration: underline;
+}
+.detail {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
 }

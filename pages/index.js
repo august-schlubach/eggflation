@@ -7,7 +7,8 @@ export default function Home() {
       <div className="center-box">
         <div className="text-center w-100">
           <p>
-            Eggs, Grade A, large, per doz. <em>March: $6.23</em>
+            <b>Eggs</b>,{" "}
+            <span className="detail">Grade A, large, per doz.</span>
           </p>
           <EggsChart />
         </div>
