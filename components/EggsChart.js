@@ -31,7 +31,6 @@ export default function EggsChart() {
             const price = +value;
             const date = new Date(+row.Year, i);
             chartData.push({ date, price });
-            // Track the last valid date
             if (!lastValidDate || date > lastValidDate) {
               lastValidDate = date;
             }
@@ -39,7 +38,6 @@ export default function EggsChart() {
         });
       });
 
-      // Only keep data up to lastValidDate (March 2023 in your case)
       chartData = chartData.filter((d) => d.date <= lastValidDate);
 
       const width = 500,
@@ -62,7 +60,6 @@ export default function EggsChart() {
         .nice()
         .range([height - margin.bottom, margin.top]);
 
-      // X-axis: show only years
       svg
         .append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -77,21 +74,25 @@ export default function EggsChart() {
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y));
 
-      svg
-        .append("path")
-        .datum(chartData)
-        .attr("fill", "none")
-        .attr("stroke", "#69b3a2")
-        .attr("stroke-width", 2)
-        .attr(
-          "d",
-          d3
-            .line()
-            .x((d) => x(d.date))
-            .y((d) => y(d.price))
-        );
+      // Draw colored line segments
+      for (let i = 1; i < chartData.length; i++) {
+        const prev = chartData[i - 1];
+        const curr = chartData[i];
+        let color = "#888"; // Default for unchanged
+        if (curr.price > prev.price) color = "red";
+        else if (curr.price < prev.price) color = "green";
 
-      // Mouseover interactivity
+        svg
+          .append("line")
+          .attr("x1", x(prev.date))
+          .attr("y1", y(prev.price))
+          .attr("x2", x(curr.date))
+          .attr("y2", y(curr.price))
+          .attr("stroke", color)
+          .attr("stroke-width", 2);
+      }
+
+      // Tooltip and focus (unchanged)
       const tooltip = d3
         .select("body")
         .append("div")
