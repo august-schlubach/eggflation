@@ -1,18 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
-.component-box {
-  width: 550px;
-  height: 320px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: normal;
-  justify-content: left;
-  vertical-align: top;
-  padding: 15px;
-  margin-bottom: 20px;
-}
 body,
 html {
   height: 100%; /* Ensure full height for the parent elements */
@@ -35,6 +22,28 @@ a.hover {
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontal centering */
-  justify-content: center; /* Vertical centering */
-  height: 100%; /* Occupy full page height */
+  justify-content: flex-start; /* Start content at the top */
+  padding-top: 10px; /* Ensure 10px spacing from the top */
+  min-height: 100vh; /* Ensure the container occupies at least the full viewport height */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
+.prose {
+  /* make some text styles for readability */
+  font-size: 0.8em;
+  text-align: left;
+  margin-top: 10px;
+}
+.component-box {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: normal;
+  justify-content: left;
+  vertical-align: top;
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 550px;
+  height: auto; /* Allow the height to adjust based on content */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
