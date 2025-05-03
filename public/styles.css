@@ -32,6 +32,8 @@ a.hover {
   font-size: 0.8em;
   text-align: left;
   margin-top: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 .component-box {
   display: flex;

@@ -14,13 +14,10 @@ export default function Home() {
           <div className="prose mt-4">
             Egg prices are a useful indicator of consumer pressures because eggs
             are a staple in nearly every household, making their cost highly
-            visible. Recent sharp increases, driven by inflation and supply
-            disruptions like avian flu, signal rising basic living expenses that
-            may force consumers to adjust spending or eating habits. Since eggs
-            are affordable and widely bought, price changes reflect broader
-            economic forces-such as supply chain issues and production
-            costs-making them a practical gauge of inflation’s impact on daily
-            life.
+            visible. Since eggs are affordable and widely bought, price changes
+            reflect broader economic forces-such as supply chain issues and
+            production costs-making them a practical gauge of inflation’s impact
+            on daily life.
           </div>
         </div>
       </div>
