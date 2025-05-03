@@ -6,11 +6,11 @@ html {
   margin: 0; /* Remove any default margin */
   font-family: "Open Sans", sans-serif;
 }
-a {
+body a {
   color: #8f0000;
   text-decoration: none;
 }
-a:hover {
+body a:hover {
   text-decoration: underline;
 }
 .detail {
