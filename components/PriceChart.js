@@ -2,11 +2,11 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-export default function EggsChart() {
+export default function GenericChart({ csvUrl }) {
   const ref = useRef();
 
   useEffect(() => {
-    d3.csv("/eggs-avg.csv").then((data) => {
+    d3.csv(csvUrl).then((data) => {
       const months = [
         "Jan",
         "Feb",
@@ -54,9 +54,12 @@ export default function EggsChart() {
         .scaleTime()
         .domain([d3.min(chartData, (d) => d.date), lastValidDate])
         .range([margin.left, width - margin.right]);
+
+      // Calculate y-axis domain starting from the minimum price - 1
+      const minPrice = d3.min(chartData, (d) => d.price);
       const y = d3
         .scaleLinear()
-        .domain([0, d3.max(chartData, (d) => d.price)])
+        .domain([minPrice - 0.5, d3.max(chartData, (d) => d.price)])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
@@ -78,7 +81,7 @@ export default function EggsChart() {
       for (let i = 1; i < chartData.length; i++) {
         const prev = chartData[i - 1];
         const curr = chartData[i];
-        let color = "#888"; // Default for unchanged
+        let color = "#888";
         if (curr.price > prev.price) color = "red";
         else if (curr.price < prev.price) color = "green";
 
@@ -152,7 +155,7 @@ export default function EggsChart() {
         tooltip.remove();
       };
     });
-  }, []);
+  }, [csvUrl]);
 
   return <svg ref={ref}></svg>;
 }
