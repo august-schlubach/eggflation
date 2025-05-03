@@ -6,21 +6,22 @@ export default function GenericChart({ csvUrl }) {
   const ref = useRef();
   const [chartWidth, setChartWidth] = useState(350); // Initial width
 
-  // Dynamically update the chart width based on the parent container
   useEffect(() => {
-    const updateWidth = () => {
-      if (ref.current?.parentElement) {
-        const parentWidth = ref.current.parentElement.offsetWidth;
-        setChartWidth(parentWidth);
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.target === ref.current?.parentElement) {
+          setChartWidth(entry.contentRect.width); // Update chart width on resize
+        }
       }
+    });
+
+    if (ref.current?.parentElement) {
+      resizeObserver.observe(ref.current.parentElement);
+    }
+
+    return () => {
+      resizeObserver.disconnect(); // Cleanup observer on unmount
     };
-
-    // Update width on component mount and window resize
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-
-    // Cleanup listener on unmount
-    return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
   useEffect(() => {
@@ -73,7 +74,6 @@ export default function GenericChart({ csvUrl }) {
         .domain([d3.min(chartData, (d) => d.date), lastValidDate])
         .range([margin.left, chartWidth - margin.right]);
 
-      // Calculate y-axis domain starting from the minimum price - 0.5
       const minPrice = d3.min(chartData, (d) => d.price);
       const y = d3
         .scaleLinear()
@@ -96,7 +96,6 @@ export default function GenericChart({ csvUrl }) {
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y));
 
-      // Draw colored line segments
       for (let i = 1; i < chartData.length; i++) {
         const prev = chartData[i - 1];
         const curr = chartData[i];
@@ -114,7 +113,6 @@ export default function GenericChart({ csvUrl }) {
           .attr("stroke-width", 2);
       }
 
-      // Tooltip and focus (unchanged)
       const tooltip = d3
         .select("body")
         .append("div")
