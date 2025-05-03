@@ -1,75 +1,84 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
+/* Global Styles */
 body,
 html {
-  height: 100%; /* Ensure full height for the parent elements */
-  margin: 0; /* Remove any default margin */
+  height: 100%;
+  margin: 0;
   font-family: "Open Sans", sans-serif;
 }
+
 body a {
   color: #8f0000;
   text-decoration: none;
 }
+
 body a:hover {
   text-decoration: underline;
 }
+
+/* Detail Text Style */
 .detail {
   font-size: 0.9em;
   color: #666;
   font-style: italic;
 }
+
+/* Container */
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Horizontal centering */
-  justify-content: flex-start; /* Start content at the top */
-  padding-top: 10px; /* Ensure 10px spacing from the top */
-  min-height: 100vh; /* Ensure the container occupies at least the full viewport height */
-  box-sizing: border-box; /* Include padding in height calculation */
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
+
+/* Prose Section */
 .prose {
-  /* make some text styles for readability */
   font-size: 0.8em;
   text-align: left;
   margin-top: 10px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 0 25px; /* Combined padding-left and padding-right */
 }
+
+/* Component Box */
 .component-box {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: normal;
-  justify-content: left;
-  vertical-align: top;
+  flex-direction: column;
   padding: 15px;
   margin-bottom: 20px;
-  width: 600px; /* Default width for web users */
-  height: auto; /* Allow the height to adjust based on content */
+  width: 600px;
+  height: auto;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .component-box {
-    width: 400px; /* Adjust width for mobile users */
+    width: 400px;
   }
 }
-li {
-  list-style-type: none; /* Remove default list styling */
+
+/* List Styles */
+body ul {
   padding-left: 0;
-  font-size: 0.8em; /* Remove padding for list items */
+  margin: 0;
+}
+
+body li {
+  list-style-type: none;
+  font-size: 0.8em;
   padding-bottom: 5px;
 }
-ul {
-  padding-left: 0; /* Remove padding for the unordered list */
-  margin: 0; /* Remove default margin */
-}
+
+/* News Links Section */
 .news-links {
   display: flex;
-  flex-direction: column; /* Stack links vertically */
-  align-items: normal; /* Center links horizontally */
-  justify-content: left; /* Center links vertically */
-  width: 100%; /* Full width for the container */
+  flex-direction: column;
+  width: 100%;
   padding-left: 15px;
 }
