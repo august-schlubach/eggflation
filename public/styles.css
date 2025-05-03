@@ -43,9 +43,15 @@ a.hover {
   vertical-align: top;
   padding: 15px;
   margin-bottom: 20px;
-  width: 400px;
+  width: 500px; /* Default width for web users */
   height: auto; /* Allow the height to adjust based on content */
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .component-box {
+    width: 400px; /* Adjust width for mobile users */
+  }
 }

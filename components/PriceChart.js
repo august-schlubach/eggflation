@@ -1,9 +1,27 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 export default function GenericChart({ csvUrl }) {
   const ref = useRef();
+  const [chartWidth, setChartWidth] = useState(350); // Initial width
+
+  // Dynamically update the chart width based on the parent container
+  useEffect(() => {
+    const updateWidth = () => {
+      if (ref.current?.parentElement) {
+        const parentWidth = ref.current.parentElement.offsetWidth;
+        setChartWidth(parentWidth);
+      }
+    };
+
+    // Update width on component mount and window resize
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
   useEffect(() => {
     d3.csv(csvUrl).then((data) => {
@@ -40,12 +58,12 @@ export default function GenericChart({ csvUrl }) {
 
       chartData = chartData.filter((d) => d.date <= lastValidDate);
 
-      const width = 350,
-        height = 250,
+      const height = 250,
         margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
       const svg = d3
         .select(ref.current)
-        .attr("width", width)
+        .attr("width", chartWidth) // Use dynamic width
         .attr("height", height);
 
       svg.selectAll("*").remove();
@@ -53,9 +71,9 @@ export default function GenericChart({ csvUrl }) {
       const x = d3
         .scaleTime()
         .domain([d3.min(chartData, (d) => d.date), lastValidDate])
-        .range([margin.left, width - margin.right]);
+        .range([margin.left, chartWidth - margin.right]);
 
-      // Calculate y-axis domain starting from the minimum price - 1
+      // Calculate y-axis domain starting from the minimum price - 0.5
       const minPrice = d3.min(chartData, (d) => d.price);
       const y = d3
         .scaleLinear()
@@ -72,6 +90,7 @@ export default function GenericChart({ csvUrl }) {
             .ticks(d3.timeYear.every(1))
             .tickFormat(d3.timeFormat("%Y"))
         );
+
       svg
         .append("g")
         .attr("transform", `translate(${margin.left},0)`)
@@ -120,7 +139,7 @@ export default function GenericChart({ csvUrl }) {
         .append("rect")
         .attr("fill", "none")
         .attr("pointer-events", "all")
-        .attr("width", width - margin.left - margin.right)
+        .attr("width", chartWidth - margin.left - margin.right)
         .attr("height", height - margin.top - margin.bottom)
         .attr("transform", `translate(${margin.left},${margin.top})`)
         .on("mouseover", () => {
@@ -155,7 +174,7 @@ export default function GenericChart({ csvUrl }) {
         tooltip.remove();
       };
     });
-  }, [csvUrl]);
+  }, [csvUrl, chartWidth]);
 
   return <svg ref={ref}></svg>;
 }
