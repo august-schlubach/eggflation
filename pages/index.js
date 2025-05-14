@@ -34,10 +34,11 @@ export default function Home() {
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=ivkDQzMQBL4&ab_channel=PBSNewsHour"
+                href="https://www.usatoday.com/story/money/2025/05/13/egg-prices-dropped-april-fall-or-rise/83602609007/"
                 target="_blank"
                 rel="noopener noreferrer">
-                As egg prices rise, some take a crack at chicken rentals
+                Egg prices fell for the first time in months. Will they get any
+                cheaper?
               </a>
             </li>
           </ul>
