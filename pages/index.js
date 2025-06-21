@@ -11,7 +11,7 @@ export default function Home() {
             <span className="detail">Grade A, large, per doz.</span>
           </p>
           <PriceChart csvUrl="/eggs-avg.csv" />
-          <div className="stats mt-4">YTD Change: +25.86%</div>
+
           <div className="prose mt-4">
             Egg prices are a useful indicator of consumer pressures because eggs
             are a staple in nearly every household, making their cost highly
@@ -25,11 +25,10 @@ export default function Home() {
           <ul>
             <li>
               <a
-                href="https://thehill.com/opinion/campaign/5275227-egg-price-inflation-cal-maine/ "
+                href="https://www.newsweek.com/20-million-egg-recall-price-impact-2086698"
                 target="_blank"
                 rel="noopener noreferrer">
-                Egg companies are getting government bailouts while
-                price-gouging consumers
+                How Recall of 20 Million Eggs Could Affect US Prices
               </a>
             </li>
             <li>
@@ -52,7 +51,7 @@ export default function Home() {
             <span className="detail">U.S. City Average</span>
           </p>
           <PriceChart csvUrl="/cpi.csv" />
-          <div className="stats mt-4">YTD Change: +3.69%</div>
+
           <div className="prose mt-4">
             <p>
               The Consumer Price Index (CPI), calculated monthly by the U.S.
